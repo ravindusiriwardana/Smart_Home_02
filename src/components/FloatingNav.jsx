@@ -55,7 +55,7 @@ const NAV = [
   },
   {
     path: "/chatbot",
-    label: "AI Chat",
+    label: "Chat Bot",
     icon: (
       <svg
         width="15"
