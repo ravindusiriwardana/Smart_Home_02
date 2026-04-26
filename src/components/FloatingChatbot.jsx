@@ -2,18 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 
 // Design tokens (copied from Home.jsx)
 const T = {
-  bg:         '#060d14',
-  surface:    '#0c1a27',
-  surfaceAlt: '#0f2030',
-  border:     'rgba(0,200,160,0.13)',
-  borderHov:  'rgba(0,200,160,0.32)',
+  bg:         'var(--sh-bg)',
+  surface:    'var(--sh-surface)',
+  surfaceAlt: 'var(--sh-surface-alt)',
+  border:     'var(--sh-border)',
+  borderHov:  'var(--sh-border-strong)',
   teal:       '#00c8a0',
   amber:      '#ffb932',
   coral:      '#ff6b6b',
   purple:     '#a78bfa',
-  text:       '#e8f4f8',
-  textSub:    '#4a7a8a',
-  textMuted:  '#1e3a4a',
+  text:       'var(--sh-text)',
+  textSub:    'var(--sh-text-sub)',
+  textMuted:  'var(--sh-text-muted)',
   font:       "'Syne', sans-serif",
   mono:       "'Space Mono', monospace",
 };

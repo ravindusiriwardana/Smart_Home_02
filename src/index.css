@@ -1,111 +1,118 @@
+/*
+  SmartHome theme variables.
+  Default MUST be light (regardless of OS theme).
+*/
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --sh-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --sh-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Accents (same in both themes) */
+  --sh-teal: #00c8a0;
+  --sh-amber: #ffb932;
+  --sh-coral: #ff6b6b;
+  --sh-purple: #a78bfa;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  /* Light theme (default) */
+  --sh-bg: #f6f8fb;
+  --sh-surface: #ffffff;
+  --sh-surface-alt: #f0f4f8;
+  --sh-panel: rgba(255, 255, 255, 0.72);
+  --sh-border: rgba(16, 24, 40, 0.10);
+  --sh-border-strong: rgba(16, 24, 40, 0.16);
+
+  --sh-text: #0b1220;
+  --sh-text-sub: rgba(11, 18, 32, 0.65);
+  --sh-text-muted: rgba(11, 18, 32, 0.40);
+
+  --sh-shadow: 0 10px 30px rgba(16, 24, 40, 0.12);
+  --sh-glass-blur: blur(18px);
+
+  font-family: var(--sh-font);
+  color: var(--sh-text);
+  background: var(--sh-bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+html[data-theme="dark"] {
+  --sh-bg: #060d14;
+  --sh-surface: #0c1a27;
+  --sh-surface-alt: #0f2030;
+  --sh-panel: rgba(12, 26, 39, 0.72);
+  --sh-border: rgba(0, 200, 160, 0.13);
+  --sh-border-strong: rgba(0, 200, 160, 0.28);
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+  --sh-text: #e8f4f8;
+  --sh-text-sub: #4a7a8a;
+  --sh-text-muted: #1e3a4a;
+
+  --sh-shadow: 0 12px 44px rgba(0, 0, 0, 0.55);
 }
 
 body {
   margin: 0;
+  background: var(--sh-bg);
+  color: var(--sh-text);
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* Reusable theme-aware utility classes (used by JSX) */
+.sh-app {
+  min-height: 100svh;
+  background: var(--sh-bg);
+  color: var(--sh-text);
+  position: relative;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+.sh-glass {
+  background: var(--sh-panel);
+  border: 1px solid var(--sh-border);
+  box-shadow: var(--sh-shadow);
+  backdrop-filter: var(--sh-glass-blur);
+  -webkit-backdrop-filter: var(--sh-glass-blur);
 }
 
-code,
-.counter {
-  font-family: var(--mono);
+.sh-card {
+  background: color-mix(in srgb, var(--sh-surface) 75%, transparent);
+  border: 1px solid var(--sh-border);
+  border-radius: 14px;
+}
+
+.sh-text-sub {
+  color: var(--sh-text-sub);
+}
+
+.sh-text-muted {
+  color: var(--sh-text-muted);
+}
+
+.sh-toggle {
+  height: 34px;
+  width: 34px;
   display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--sh-border-strong);
+  background: transparent;
+  color: var(--sh-text-sub);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.sh-toggle:hover {
+  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--sh-teal) 10%, transparent);
+  color: var(--sh-text);
+}
+
+.sh-toggle:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--sh-teal) 65%, transparent);
+  outline-offset: 2px;
 }

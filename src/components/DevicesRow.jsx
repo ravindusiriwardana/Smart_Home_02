@@ -13,7 +13,7 @@ function DevicesRow() {
 
 function Device({ name }) {
   return (
-    <div className="bg-white/10 backdrop-blur-lg p-4 rounded-xl text-white flex justify-between">
+    <div className="sh-glass sh-card p-4 rounded-xl flex justify-between">
       <span>{name}</span>
       <div className="w-10 h-5 bg-green-400 rounded-full"></div>
     </div>

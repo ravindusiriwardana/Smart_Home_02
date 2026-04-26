@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTheme } from "../theme/ThemeProvider.jsx";
 
 const NAV = [
   {
@@ -74,6 +75,7 @@ export default function FloatingNav() {
   const location = useLocation();
   const navigate = useNavigate();
   const [hovered, setHovered] = useState(null);
+  const { theme, toggle } = useTheme();
 
   return (
     <nav
@@ -82,16 +84,16 @@ export default function FloatingNav() {
         bottom: 28,
         left: "50%",
         transform: "translateX(-50%)",
-        background: "rgba(12,26,39,0.9)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        border: "1px solid rgba(0,200,160,0.2)",
+        background: "var(--sh-panel)",
+        backdropFilter: "var(--sh-glass-blur)",
+        WebkitBackdropFilter: "var(--sh-glass-blur)",
+        border: "1px solid var(--sh-border)",
         borderRadius: 50,
         padding: "7px 10px",
         display: "flex",
         gap: 4,
         zIndex: 1000,
-        boxShadow: "0 8px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,200,160,0.04)",
+        boxShadow: "var(--sh-shadow)",
       }}>
       {NAV.map((item) => {
         const active = location.pathname === item.path;
@@ -109,15 +111,15 @@ export default function FloatingNav() {
               padding: active || isHovered ? "9px 18px" : "9px 13px",
               borderRadius: 40,
               border: active
-                ? "1px solid rgba(0,200,160,0.35)"
+                ? "1px solid var(--sh-border-strong)"
                 : "1px solid transparent",
               cursor: "pointer",
               background: active
-                ? "rgba(0,200,160,0.16)"
+                ? "color-mix(in srgb, var(--sh-teal) 14%, transparent)"
                 : isHovered
-                  ? "rgba(0,200,160,0.07)"
+                  ? "color-mix(in srgb, var(--sh-teal) 8%, transparent)"
                   : "transparent",
-              color: active ? "#00c8a0" : "#4a7a8a",
+              color: active ? "var(--sh-teal)" : "var(--sh-text-sub)",
               fontFamily: "'Syne', sans-serif",
               fontWeight: 600,
               fontSize: 13,
@@ -139,6 +141,24 @@ export default function FloatingNav() {
           </button>
         );
       })}
+
+      <button
+        type="button"
+        className="sh-toggle"
+        onClick={toggle}
+        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        title={theme === "dark" ? "Light mode" : "Dark mode"}>
+        {theme === "dark" ? (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+        ) : (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        )}
+      </button>
     </nav>
   );
 }

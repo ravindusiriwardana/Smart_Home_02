@@ -13,7 +13,7 @@ function KPISection() {
 
 function Card({ title, value }) {
   return (
-    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-4 text-white">
+    <div className="sh-glass sh-card rounded-xl p-4">
       <p>{title}</p>
       <h2 className="text-xl font-bold">{value}</h2>
     </div>

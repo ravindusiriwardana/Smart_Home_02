@@ -7,11 +7,11 @@ import {
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const T = {
-  bg:         '#060d14',
-  surface:    '#0c1a27',
-  surfaceAlt: '#0f2030',
-  border:     'rgba(0,200,160,0.13)',
-  borderHov:  'rgba(0,200,160,0.32)',
+  bg:         'var(--sh-bg)',
+  surface:    'var(--sh-surface)',
+  surfaceAlt: 'var(--sh-surface-alt)',
+  border:     'var(--sh-border)',
+  borderHov:  'var(--sh-border-strong)',
   teal:       '#00c8a0',
   tealSoft:   'rgba(0,200,160,0.10)',
   tealGlow:   'rgba(0,200,160,0.22)',
@@ -20,9 +20,9 @@ const T = {
   coral:      '#ff6b6b',
   coralSoft:  'rgba(255,107,107,0.10)',
   purple:     '#a78bfa',
-  text:       '#e8f4f8',
-  textSub:    '#4a7a8a',
-  textMuted:  '#1e3a4a',
+  text:       'var(--sh-text)',
+  textSub:    'var(--sh-text-sub)',
+  textMuted:  'var(--sh-text-muted)',
   font:       "'Syne', sans-serif",
   mono:       "'Space Mono', monospace",
 };
@@ -506,7 +506,7 @@ function UsagePanel() {
       {loading && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {[100,70,85,55,90].map((w,i) => (
-            <div key={i} style={{ height: 12, width: `${w}%`, borderRadius: 6, background: `linear-gradient(90deg, ${T.border} 25%, ${T.surfaceAlt} 50%, ${T.border} 75%)`, backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite', animationDelay: `${i*0.12}s` }} />
+            <div key={i} style={{ height: 12, width: `${w}%`, borderRadius: 6, backgroundImage: `linear-gradient(90deg, ${T.border} 25%, ${T.surfaceAlt} 50%, ${T.border} 75%)`, backgroundSize: '200% 100%', animation: 'shimmer 1.4s infinite', animationDelay: `${i*0.12}s` }} />
           ))}
         </div>
       )}
@@ -601,9 +601,8 @@ export default function Home() {
         @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.25} }
         @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #060d14; }
         input[type=number]::-webkit-inner-spin-button { opacity: 0.3; }
-        select option { background: #0f2030; }
+        select option { background: var(--sh-surface-alt); }
       `}</style>
 
       <div style={{ background: T.bg, color: T.text, fontFamily: T.font, minHeight: '100vh' }}>

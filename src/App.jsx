@@ -12,10 +12,7 @@ import "./App.css";
 function App() {
   return (
     <Router>
-      {/* Setting a dark background here so it matches the floating nav 
-        and the rest of your glassmorphism theme 
-      */}
-      <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
+      <div className="sh-app">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/analytical" element={<Analytical />} />

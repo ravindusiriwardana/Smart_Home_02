@@ -46,8 +46,8 @@ export default function Sidebar() {
       style={{
         width: 220,
         minHeight: "100vh",
-        background: "#0c1a27",
-        borderRight: "1px solid rgba(0,200,160,0.12)",
+        background: "var(--sh-surface)",
+        borderRight: "1px solid var(--sh-border)",
         display: "flex",
         flexDirection: "column",
         padding: "1.5rem 1rem",
@@ -68,13 +68,13 @@ export default function Sidebar() {
             width: 34,
             height: 34,
             borderRadius: 10,
-            background: "rgba(0,200,160,0.12)",
-            border: "1px solid rgba(0,200,160,0.28)",
+            background: "color-mix(in srgb, var(--sh-teal) 12%, transparent)",
+            border: "1px solid var(--sh-border-strong)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             fontSize: 16,
-            color: "#00c8a0",
+            color: "var(--sh-teal)",
           }}>
           ◈
         </div>
@@ -83,12 +83,12 @@ export default function Sidebar() {
             style={{
               fontSize: 13,
               fontWeight: 700,
-              color: "#e8f4f8",
+              color: "var(--sh-text)",
               letterSpacing: ".02em",
             }}>
             SmartHome
           </div>
-          <div style={{ fontSize: 10, color: "#4a7a8a", marginTop: 1 }}>
+          <div style={{ fontSize: 10, color: "var(--sh-text-sub)", marginTop: 1 }}>
             Energy Platform
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function Sidebar() {
       <div
         style={{
           fontSize: 10,
-          color: "#2a5a6a",
+          color: "var(--sh-text-muted)",
           textTransform: "uppercase",
           letterSpacing: ".1em",
           marginBottom: 8,
@@ -126,12 +126,12 @@ export default function Sidebar() {
                 padding: "10px 12px",
                 borderRadius: 10,
                 background: active
-                  ? "rgba(0,200,160,0.12)"
+                  ? "color-mix(in srgb, var(--sh-teal) 12%, transparent)"
                   : isHovered
-                    ? "rgba(0,200,160,0.06)"
+                    ? "color-mix(in srgb, var(--sh-teal) 7%, transparent)"
                     : "transparent",
                 border: `1px solid ${active ? "rgba(0,200,160,0.28)" : "transparent"}`,
-                color: active ? "#00c8a0" : isHovered ? "#e8f4f8" : "#4a7a8a",
+                color: active ? "var(--sh-teal)" : isHovered ? "var(--sh-text)" : "var(--sh-text-sub)",
                 cursor: "pointer",
                 fontFamily: "'Syne', sans-serif",
                 fontWeight: 600,
@@ -146,7 +146,9 @@ export default function Sidebar() {
                 <div
                   style={{
                     fontSize: 10,
-                    color: active ? "rgba(0,200,160,0.6)" : "#2a5a6a",
+                    color: active
+                      ? "color-mix(in srgb, var(--sh-teal) 65%, transparent)"
+                      : "var(--sh-text-muted)",
                     fontWeight: 400,
                     marginTop: 1,
                   }}>
@@ -160,7 +162,7 @@ export default function Sidebar() {
                     width: 5,
                     height: 5,
                     borderRadius: "50%",
-                    background: "#00c8a0",
+                    background: "var(--sh-teal)",
                     animation: "pulse-dot 1.8s infinite",
                   }}
                 />
@@ -173,7 +175,7 @@ export default function Sidebar() {
       {/* Footer */}
       <div
         style={{
-          borderTop: "1px solid rgba(0,200,160,0.1)",
+          borderTop: "1px solid var(--sh-border)",
           paddingTop: "1rem",
         }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -194,13 +196,13 @@ export default function Sidebar() {
             SH
           </div>
           <div>
-            <div style={{ fontSize: 12, fontWeight: 600, color: "#e8f4f8" }}>
+            <div style={{ fontSize: 12, fontWeight: 600, color: "var(--sh-text)" }}>
               Smart Home
             </div>
             <div
               style={{
                 fontSize: 10,
-                color: "#4a7a8a",
+                color: "var(--sh-text-sub)",
                 display: "flex",
                 alignItems: "center",
                 gap: 5,
@@ -211,7 +213,7 @@ export default function Sidebar() {
                   width: 5,
                   height: 5,
                   borderRadius: "50%",
-                  background: "#00c8a0",
+                  background: "var(--sh-teal)",
                   display: "inline-block",
                   animation: "pulse-dot 1.8s infinite",
                 }}

@@ -10,12 +10,12 @@ const API_BASE = 'http://localhost:3001/api/analytics';
 
 // ─── Design tokens ─────────────────────────────────────────────────────────────
 const C = {
-  bg:           '#06090f',
-  surface:      '#0c1119',
-  surfaceAlt:   '#101620',
-  panel:        '#141d2c',
-  border:       '#18253a',
-  borderLight:  '#1e2f47',
+  bg:           'var(--sh-bg)',
+  surface:      'var(--sh-surface)',
+  surfaceAlt:   'var(--sh-surface-alt)',
+  panel:        'var(--sh-surface-alt)',
+  border:       'var(--sh-border)',
+  borderLight:  'var(--sh-border-strong)',
   accent:       '#00c8f0',
   accentSoft:   'rgba(0,200,240,0.09)',
   green:        '#05d89c',
@@ -30,9 +30,9 @@ const C = {
   pinkSoft:     'rgba(232,121,168,0.09)',
   teal:         '#2dd4bf',
   tealSoft:     'rgba(45,212,191,0.09)',
-  txt:          '#dde6f5',
-  txtSub:       '#4a6080',
-  txtMuted:     '#253040',
+  txt:          'var(--sh-text)',
+  txtSub:       'var(--sh-text-sub)',
+  txtMuted:     'var(--sh-text-muted)',
 };
 
 const PALETTE = [
@@ -137,7 +137,7 @@ function Skeleton() {
       {[95, 70, 85, 55, 75].map((w, i) => (
         <div key={i} style={{
           height: 12, width: `${w}%`, borderRadius: 6,
-          background: `linear-gradient(90deg,${C.border} 25%,${C.panel} 50%,${C.border} 75%)`,
+          backgroundImage: `linear-gradient(90deg,${C.border} 25%,${C.panel} 50%,${C.border} 75%)`,
           backgroundSize: '200% 100%',
           animation: `shimmer 1.4s infinite ${i * 0.1}s`,
         }} />
@@ -197,8 +197,10 @@ function OverviewView({ data, loading, error }) {
   if (error)   return <Err msg={error} />;
   if (!data)   return null;
 
-  const { summary, daily, applianceTotals, areaSummary } = data;
+  const { summary, daily, hourlyComparisonByDay, applianceTotals, areaSummary } = data;
   const maxApp = applianceTotals?.[0]?.total || 1;
+  const hcDays = hourlyComparisonByDay?.dates || [];
+  const hcData = hourlyComparisonByDay?.data || [];
 
   // Merge areaSummary totals into AREA_TABS for the area cards
   const areaCards = AREA_TABS.map((tab) => {
@@ -272,6 +274,30 @@ function OverviewView({ data, loading, error }) {
           </div>
         </Card>
       </div>
+
+      {/* Hourly comparison */}
+      <Card style={{ marginBottom: '1.2rem' }}>
+        <SecTitle color={C.teal}>Hourly Consumption Comparison — Last Days</SecTitle>
+        {hcData.length ? (
+          <ResponsiveContainer width="100%" height={240}>
+            <BarChart data={hcData} barSize={10} barGap={2}>
+              <CartesianGrid strokeDasharray="3 3" stroke={C.border} />
+              <XAxis dataKey="hour" stroke={C.txtMuted} tick={{ fontSize: 10, fill: C.txtSub }} tickFormatter={hFmt} />
+              <YAxis stroke={C.txtMuted} tick={{ fontSize: 10, fill: C.txtSub }} />
+              <Tooltip {...tt} labelFormatter={hFmt} />
+              {hcDays.map((d, i) => (
+                <Bar
+                  key={d}
+                  dataKey={d}
+                  name={d}
+                  fill={PALETTE[i % PALETTE.length]}
+                  radius={[3, 3, 0, 0]}
+                />
+              ))}
+            </BarChart>
+          </ResponsiveContainer>
+        ) : <Skeleton />}
+      </Card>
 
       {/* Area summary cards */}
       <SecTitle color={C.purple}>Usage by Area</SecTitle>

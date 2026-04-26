@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 
 // Design tokens (copied from Home.jsx)
 const T = {
-  bg:         '#060d14',
-  surface:    '#0c1a27',
-  surfaceAlt: '#0f2030',
-  border:     'rgba(0,200,160,0.13)',
-  borderHov:  'rgba(0,200,160,0.32)',
+  bg:         'var(--sh-bg)',
+  surface:    'var(--sh-surface)',
+  surfaceAlt: 'var(--sh-surface-alt)',
+  border:     'var(--sh-border)',
+  borderHov:  'var(--sh-border-strong)',
   teal:       '#00c8a0',
   amber:      '#ffb932',
   coral:      '#ff6b6b',
   purple:     '#a78bfa',
-  text:       '#e8f4f8',
-  textSub:    '#4a7a8a',
-  textMuted:  '#1e3a4a',
+  text:       'var(--sh-text)',
+  textSub:    'var(--sh-text-sub)',
+  textMuted:  'var(--sh-text-muted)',
   font:       "'Syne', sans-serif",
   mono:       "'Space Mono', monospace",
 };
@@ -75,7 +75,6 @@ function Chatbot() {
     <>
       <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
       <style>{`
-        body { background: #060d14; }
         .animate-fade-in { animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         ::-webkit-scrollbar { width: 8px; background: ${T.surface}; }
@@ -144,7 +143,7 @@ function Chatbot() {
                     fontSize: 15,
                     fontFamily: T.font,
                     background: msg.role === 'user' ? T.teal : T.surfaceAlt,
-                    color: msg.role === 'user' ? '#060d14' : T.text,
+                    color: msg.role === 'user' ? 'rgba(6,13,20,1)' : T.text,
                     fontWeight: 500,
                     boxShadow: '0 2px 12px #0002',
                     borderBottomRightRadius: msg.role === 'user' ? 4 : 18,

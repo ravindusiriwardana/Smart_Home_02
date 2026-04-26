@@ -75,36 +75,41 @@ function Appliances() {
   const COLORS = ['#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6', '#f97316', '#6366f1', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white px-6 py-16">
+    <div
+      className="min-h-screen px-6 py-16"
+      style={{
+        background: "radial-gradient(1200px 600px at 20% 10%, color-mix(in srgb, var(--sh-teal) 14%, transparent), transparent 55%), radial-gradient(900px 500px at 90% 20%, color-mix(in srgb, var(--sh-purple) 14%, transparent), transparent 55%), var(--sh-bg)",
+        color: "var(--sh-text)",
+      }}>
       <div className="max-w-7xl mx-auto">
         <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
           Appliance Consumption
         </h1>
-        <p className="text-gray-300 mb-12">Monitor energy usage by appliance and optimize your home's efficiency</p>
+        <p className="mb-12 sh-text-sub">Monitor energy usage by appliance and optimize your home's efficiency</p>
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-gray-400">Loading data...</p>
+            <p className="sh-text-muted">Loading data...</p>
           </div>
         ) : (
           <>
             {/* Overview Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-              <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20">
-                <p className="text-gray-400 text-sm mb-2">Total Appliances</p>
+              <div className="sh-glass sh-card p-6 rounded-xl">
+                <p className="sh-text-muted text-sm mb-2">Total Appliances</p>
                 <p className="text-3xl font-bold text-cyan-400">{applianceData.length}</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20">
-                <p className="text-gray-400 text-sm mb-2">Highest Consumer</p>
+              <div className="sh-glass sh-card p-6 rounded-xl">
+                <p className="sh-text-muted text-sm mb-2">Highest Consumer</p>
                 <p className="text-2xl font-bold text-green-400">{applianceData[0]?.name}</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20">
-                <p className="text-gray-400 text-sm mb-2">Total Consumption</p>
+              <div className="sh-glass sh-card p-6 rounded-xl">
+                <p className="sh-text-muted text-sm mb-2">Total Consumption</p>
                 <p className="text-3xl font-bold text-purple-400">{(applianceData.reduce((sum, item) => sum + item.value, 0)).toFixed(2)} kW</p>
               </div>
-              <div className="bg-white/10 backdrop-blur-lg p-6 rounded-xl border border-white/20">
-                <p className="text-gray-400 text-sm mb-2">Top 3 %</p>
-                <p className="text-2xl font-bold text-orange-400\">
+              <div className="sh-glass sh-card p-6 rounded-xl">
+                <p className="sh-text-muted text-sm mb-2">Top 3 %</p>
+                <p className="text-2xl font-bold text-orange-400">
                   {applianceData.slice(0, 3).reduce((sum, item) => sum + parseFloat(item.percentage), 0).toFixed(1)}%
                 </p>
               </div>
@@ -113,7 +118,7 @@ function Appliances() {
             {/* Charts Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               {/* Pie Chart */}
-              <div className="bg-white/10 backdrop-blur-lg p-8 rounded-xl border border-white/20">
+              <div className="sh-glass sh-card p-8 rounded-xl">
                 <h2 className="text-2xl font-bold mb-6">Distribution</h2>
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
@@ -137,16 +142,16 @@ function Appliances() {
               </div>
 
               {/* Bar Chart */}
-              <div className="bg-white/10 backdrop-blur-lg p-8 rounded-xl border border-white/20">
+              <div className="sh-glass sh-card p-8 rounded-xl">
                 <h2 className="text-2xl font-bold mb-6">Consumption (kW)</h2>
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={applianceData} layout="vertical" margin={{ left: 100 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis type="number" stroke="rgba(255,255,255,0.5)" />
-                    <YAxis type="category" dataKey="name" stroke="rgba(255,255,255,0.5)" width={95} tick={{ fontSize: 11 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--sh-border)" />
+                    <XAxis type="number" stroke="var(--sh-text-muted)" />
+                    <YAxis type="category" dataKey="name" stroke="var(--sh-text-muted)" width={95} tick={{ fontSize: 11, fill: "var(--sh-text-sub)" }} />
                     <Tooltip
-                      contentStyle={{ background: '#1f2937', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8 }}
-                      labelStyle={{ color: '#fff' }}
+                      contentStyle={{ background: "var(--sh-surface)", border: "1px solid var(--sh-border)", borderRadius: 8, color: "var(--sh-text)" }}
+                      labelStyle={{ color: "var(--sh-text)" }}
                     />
                     <Bar dataKey="value" fill="#06b6d4" radius={[0, 8, 8, 0]}>
                       {applianceData.map((entry, index) => (
@@ -159,11 +164,17 @@ function Appliances() {
             </div>
 
             {/* List View */}
-            <div className="bg-white/10 backdrop-blur-lg p-8 rounded-xl border border-white/20 mb-8">
+            <div className="sh-glass sh-card p-8 rounded-xl mb-8">
               <h2 className="text-2xl font-bold mb-6">Detailed Breakdown</h2>
               <div className="space-y-3">
                 {applianceData.map((item, idx) => (
-                  <div key={idx} className="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-white/20 transition-colors">
+                  <div
+                    key={idx}
+                    className="p-4 rounded-lg transition-colors"
+                    style={{
+                      background: "color-mix(in srgb, var(--sh-surface) 55%, transparent)",
+                      border: "1px solid var(--sh-border)",
+                    }}>
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-3">
                         <div
@@ -174,10 +185,10 @@ function Appliances() {
                       </div>
                       <div className="text-right">
                         <p className="font-bold text-lg">{item.value.toFixed(2)} kW</p>
-                        <p className="text-gray-400 text-sm">{item.percentage}% of total</p>
+                        <p className="sh-text-muted text-sm">{item.percentage}% of total</p>
                       </div>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-2">
+                    <div className="w-full rounded-full h-2" style={{ background: "color-mix(in srgb, var(--sh-border) 65%, transparent)" }}>
                       <div
                         className="h-2 rounded-full transition-all"
                         style={{
@@ -193,16 +204,16 @@ function Appliances() {
 
             {/* Daily Trend */}
             {dailyComparison.length > 0 && (
-              <div className="bg-white/10 backdrop-blur-lg p-8 rounded-xl border border-white/20">
+              <div className="sh-glass sh-card p-8 rounded-xl">
                 <h2 className="text-2xl font-bold mb-6">Daily Trend (Last 7 Days)</h2>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={dailyComparison}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                    <XAxis dataKey="date" stroke="rgba(255,255,255,0.5)" />
-                    <YAxis stroke="rgba(255,255,255,0.5)" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--sh-border)" />
+                    <XAxis dataKey="date" stroke="var(--sh-text-muted)" tick={{ fill: "var(--sh-text-sub)" }} />
+                    <YAxis stroke="var(--sh-text-muted)" tick={{ fill: "var(--sh-text-sub)" }} />
                     <Tooltip
-                      contentStyle={{ background: '#1f2937', border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8 }}
-                      labelStyle={{ color: '#fff' }}
+                      contentStyle={{ background: "var(--sh-surface)", border: "1px solid var(--sh-border)", borderRadius: 8, color: "var(--sh-text)" }}
+                      labelStyle={{ color: "var(--sh-text)" }}
                     />
                     <Legend />
                     <Line type="monotone" dataKey="avgUse" stroke="#06b6d4" strokeWidth={2} name="Avg Usage (kW)" />
@@ -213,9 +224,9 @@ function Appliances() {
             )}
 
             {/* Tips Section */}
-            <div className="mt-8 bg-green-500/10 border border-green-400/30 rounded-xl p-6">
+            <div className="mt-8 rounded-xl p-6" style={{ background: "color-mix(in srgb, #22c55e 10%, transparent)", border: "1px solid color-mix(in srgb, #22c55e 35%, transparent)" }}>
               <h3 className="text-xl font-bold text-green-400 mb-4">💡 Energy Saving Tips</h3>
-              <ul className="text-gray-300 space-y-2">
+              <ul className="space-y-2 sh-text-sub">
                 <li>✓ Schedule high-consumption appliances (washing machine, dishwasher) during off-peak hours</li>
                 <li>✓ Maintain HVAC systems regularly to improve efficiency</li>
                 <li>✓ Use programmable thermostats to reduce heating/cooling costs</li>
